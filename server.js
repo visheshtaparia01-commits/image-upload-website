@@ -38,8 +38,36 @@ app.post("/upload", upload.array("images", 5), (req, res) => {
 
   fs.appendFileSync("data.txt", mobile + "\n");
 
-  res.send("Cashback will be credited in your bank account within 7 working Days (if you gave us 5 star review + rating)");
-});
+  res.send(`
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f5f5f5;
+    }
+    .message {
+      font-family: 'Poppins', Arial, sans-serif;
+      font-size: 22px;
+      color: #2e7d32;
+      font-weight: 600;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="message">
+    Cashback will be credited in your bank account within 7 working days<br>
+    (if you gave us 5 star review + rating)
+  </div>
+</body>
+</html>
+`});
 
 // Home
 app.get("/", (req, res) => {
@@ -70,6 +98,7 @@ app.get("/admin-data", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server running"));
+
 
 
 
