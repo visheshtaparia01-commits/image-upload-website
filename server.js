@@ -38,7 +38,7 @@ app.post("/upload", upload.array("images", 5), (req, res) => {
 
   fs.appendFileSync("data.txt", mobile + "\n");
 
-  res.send("✅ Data saved successfully");
+  res.send("Cashback will be credited in your bank account within 7 working Days (if you gave us 5 star review + rating)");
 });
 
 // Home
@@ -70,5 +70,6 @@ app.get("/admin-data", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server running"));
+
 
 
