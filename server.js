@@ -45,6 +45,26 @@ app.post("/upload", upload.array("images", 5), (req, res) => {
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
+// Admin panel
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "admin.html"));
+});
+
+// API to get data
+app.get("/admin-data", (req, res) => {
+  const fs = require("fs");
+
+  const mobiles = fs.existsSync("data.txt")
+    ? fs.readFileSync("data.txt", "utf-8").split("\n").filter(Boolean)
+    : [];
+
+  const images = fs.existsSync("uploads")
+    ? fs.readdirSync("uploads")
+    : [];
+
+  res.json({ mobiles, images });
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server running"));
+
