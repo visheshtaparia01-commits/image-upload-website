@@ -40,8 +40,14 @@ app.post("/upload", upload.array("images", 5), (req, res) => {
 
   res.send(`
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <title>Cashback Confirmation</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -51,12 +57,25 @@ app.post("/upload", upload.array("images", 5), (req, res) => {
       align-items: center;
       background-color: #f5f5f5;
     }
+
     .message {
       font-family: 'Poppins', Arial, sans-serif;
       font-size: 22px;
       color: #2e7d32;
       font-weight: 600;
       text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -67,7 +86,9 @@ app.post("/upload", upload.array("images", 5), (req, res) => {
   </div>
 </body>
 </html>
-`});
+  `);
+});
+
 
 // Home
 app.get("/", (req, res) => {
@@ -98,6 +119,7 @@ app.get("/admin-data", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server running"));
+
 
 
 
