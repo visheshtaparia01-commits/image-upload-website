@@ -1,13 +1,16 @@
 const express = require("express");
 const multer = require("multer");
-const path = require("path");
 const fs = require("fs");
+const path = require("path");
 
 const app = express();
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// Create uploads folder
+// Serve static files
+app.use(express.static(__dirname));
+
+// Ensure uploads folder exists
 if (!fs.existsSync("uploads")) {
   fs.mkdirSync("uploads");
 }
@@ -25,7 +28,7 @@ const upload = multer({
   limits: { files: 5 }
 });
 
-// Upload API
+// Upload route
 app.post("/upload", upload.array("images", 5), (req, res) => {
   const mobile = req.body.mobile;
 
@@ -33,7 +36,6 @@ app.post("/upload", upload.array("images", 5), (req, res) => {
     return res.status(400).send("Mobile number required");
   }
 
-  // Save mobile number
   fs.appendFileSync("data.txt", mobile + "\n");
 
   res.send("✅ Data saved successfully");
@@ -41,7 +43,7 @@ app.post("/upload", upload.array("images", 5), (req, res) => {
 
 // Home
 app.get("/", (req, res) => {
-  res.send("Server is running");
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 const PORT = process.env.PORT || 3000;
