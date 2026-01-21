@@ -45,11 +45,14 @@ app.post("/upload", upload.array("images", 5), (req, res) => {
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
+const ADMIN_KEY = "12345";
 // Admin panel
 app.get("/admin", (req, res) => {
+  if (req.query.key !== ADMIN_KEY) {
+    return res.send("Access Denied");
+  }
   res.sendFile(path.join(__dirname, "admin.html"));
 });
-
 // API to get data
 app.get("/admin-data", (req, res) => {
   const fs = require("fs");
@@ -67,4 +70,5 @@ app.get("/admin-data", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server running"));
+
 
