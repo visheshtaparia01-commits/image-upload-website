@@ -33,17 +33,18 @@
 <body>
 
 <div class="box">
-  <h2>Upload Images</h2>
+  <h2>Upload Details</h2>
 
   <form 
     action="https://image-upload-website-qntb.onrender.com/upload"
     method="POST"
     enctype="multipart/form-data"
   >
+    <h3>Upload Upi Number</h3>
     <input type="tel" name="mobile" placeholder="Mobile Number" pattern="[0-9]{10}" required>
-
+    <h3>Upload 5-star rating Screenshot</h3>
     <input type="file" name="images" multiple accept="image/*" required>
-    <small>Upload max 5 images</small>
+    <small>Upload Screenshot</small>
 
     <button type="submit">Submit</button>
   </form>
@@ -51,3 +52,4 @@
 
 </body>
 </html>
+
